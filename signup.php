@@ -18,8 +18,8 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
 <head>
 <title>Login</title>
 <link rel="stylesheet" href="css/login.css">
-<script>
-function passvis() {
+<script> 
+function myFunction() {
     var x = document.getElementById("pw");
     if (x.type === "password") {
         x.type = "text";
@@ -29,17 +29,18 @@ function passvis() {
 }
 </script>
 </head>
-<body background = "https://i.imgur.com/vIrpsIi.gif" style="background-size: cover;">
+<body background = "https://i.imgur.com/vIrpsIi.gif">
 <div class="center">
 <center id="login">
 <form action="login.php" method="POST">
 Login:<br>
 <input class="text" style="width: 160px;" type="text" name="login" placeholder="Enter login" required><br>
-Password:<br><br><br><br>
-<div class="center">
-<input class="text" id="pw" style="width: 160px;" type="password" name="password" placeholder="Enter password" required><font color="white" face="verdana" size="1">Show password</font><input style="color: white" type="checkbox" onclick="passvis()"><br><br>
-</div>
+Password:<br>
+<input id="pw" class="text" style="width: 160px;" type="password" name="password" placeholder="Enter password" required><br>
+Email:<br>
+<input class="text" style="width: 160px;" type="text" name="email" placeholder="Enter email" required><br><br>
 <input class="button" type="submit" value="Submit">
+<input type="checkbox" onclick="myFunction()">
 </form>
 </center>
 <div>
