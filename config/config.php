@@ -2,7 +2,7 @@
 session_start();
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '0796089346');
+define('DB_PASSWORD', 'no u');
 define('DB_DATABASE', 'db_camagru');
 define("BASE_URL", "127.0.0.1/camagru/");
 
@@ -13,7 +13,7 @@ function createInitialDatabase() {
 		try {
 			$conn = new PDO("mysql:host=$dbhost", DB_USERNAME, DB_PASSWORD);
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "CREATE DATABASE $dbname";
+			$sql = "CREATE DATABASE IF NOT EXISTS $dbname";
 			$conn->exec($sql);
 			echo "Database created successfully<br/>";
 		} catch (PDOException $e) {
@@ -38,12 +38,12 @@ function getDB() {
 		}
 	}
 
-function createTableDatabase() {
-	$sql="CREATE TABLE Users (
-		id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-		firstname VARCHAR(30) NOT NULL,
-		lastname VARCHAR(30) NOT NULL,
-		email VARCHAR(50)";
+function createTableDatabase($conn) {
+	$sql="CREATE TABLE IF NOT EXISTS `Users` (
+		`id` INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+		`login` VARCHAR(30) NOT NULL,
+		`password` VARCHAR(30) NOT NULL,
+		`email` VARCHAR(50));";
 	$conn->exec($sql);
 	echo "Table created";
 }
