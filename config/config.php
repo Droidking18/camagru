@@ -6,6 +6,7 @@ define('DB_PASSWORD', '0796089346');
 define('DB_DATABASE', 'db_camagru');
 define("BASE_URL", "127.0.0.1/camagru/");
 
+
 function createInitialDatabase() {
 		$dbhost = DB_SERVER;
 		$dbname = DB_DATABASE;
@@ -40,13 +41,12 @@ function getDB() {
 function createTableDatabase($conn) {
 	$sql="CREATE TABLE IF NOT EXISTS `Users` (
 		`id` INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-		`login` VARCHAR(50) NOT NULL,
-		`password` VARCHAR(30) NOT NULL,
-		`email` VARCHAR(50));";
+		`login` VARCHAR(50) NOT NULL UNIQUE,
+		`password` VARCHAR(255) NOT NULL,
+		`email` VARCHAR(50) NOT NULL UNIQUE);";
 	$conn->exec($sql);
 	$sql="INSERT INTO `Users` VALUES (0, 'dkaplan', 'killme', 'h@h.h');";
 	$conn->exec($sql);
 	echo "Table created";
 }
-
 ?>
