@@ -4,14 +4,26 @@ session_start();
 include ("config/config.php");
 include ("header.php");
 
+
 getHead();
 if (isset($_POST['login']) && isset($_POST['password'])) {
-	$lol = getDB();
+	$conn = getDB();
 	$sql = "SELECT * FROM users";
-	foreach ($lol->query($sql) as $user)
+	foreach ($conn->query($sql) as $user)
 	{
-		if ($user['login'] == $_POST['login'])
-			echo $user['login'] . "|". $_POST['login'] . "|";
+		//echo "entered: " . $user['login']  . "        DB: " . $_POST['login'];
+		if ($user['login'] == $_POST['login']){                         /* Needs to check if username matches */
+			//echo "db: " . $user['password']  . "        ennter: " . $_POST['password'];
+			if (password_verify($_POST['password'], $user['password'])){    /*needs to verify passwords matches*/
+				$_SESSION['login'] = $_POST['login'];
+				$_SESSION['hashpass'] = $_POST['password'];
+				$_SESSION['email'] = $_POST['email'];
+				exit();
+			}
+		}
+		else
+			echo ("no");
+		//print_r ($_SESSION);
 	}
 	exit();
 }
