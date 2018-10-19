@@ -11,19 +11,17 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
 	$sql = "SELECT * FROM users";
 	foreach ($conn->query($sql) as $user)
 	{
-		//echo "entered: " . $user['login']  . "        DB: " . $_POST['login'];
-		if ($user['login'] == $_POST['login']){                         /* Needs to check if username matches */
-			//echo "db: " . $user['password']  . "        ennter: " . $_POST['password'];
-			if (password_verify($_POST['password'], $user['password'])){    /*needs to verify passwords matches*/
-				$_SESSION['login'] = $_POST['login'];
-				$_SESSION['hashpass'] = $_POST['password'];
-				$_SESSION['email'] = $_POST['email'];
-				exit();
+		//print_r ($user);
+		//echo "<br>";
+		if ($user["login"] == $_POST['login'])
+			if (password_verify($_POST['password'], $user['password'])) {
+				$_SESSION['login'] = $_POST['login'];	
+				$_SESSION['email'] = $user['email'];	
+				$_SESSION['passhash'] = $user['password'];
+				exit();	
 			}
-		}
-		else
-			echo ("no");
-		//print_r ($_SESSION);
+			else
+				echo "Password Incorrect. <meta http-equiv='refresh' content='3;url=login.php' />";
 	}
 	exit();
 }
