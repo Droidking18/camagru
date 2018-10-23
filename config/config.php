@@ -2,7 +2,7 @@
 session_start();
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '0796089346');
+define('DB_PASSWORD', 'bigsucc');
 define('DB_DATABASE', 'db_camagru');
 define("BASE_URL", "127.0.0.1/camagru/");
 
