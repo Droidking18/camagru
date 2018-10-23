@@ -11,8 +11,6 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
 	$sql = "SELECT * FROM users";
 	foreach ($conn->query($sql) as $user)
 	{
-		//print_r ($user);
-		//echo "<br>";
 		if ($user["login"] == $_POST['login'])
 			if (password_verify($_POST['password'], $user['password'])) {
 				$_SESSION['login'] = $_POST['login'];	

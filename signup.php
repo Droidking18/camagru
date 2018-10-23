@@ -20,7 +20,13 @@ getHead();
 <link rel="stylesheet" href="css/login.css">
 <script>
 function checkForm(form)
-  {
+{
+    re = /^[a-zA-Z0-9_\-\.]+@[a-zA-Z0-9_\-\.]+\.[a-zA-Z]{2,5}$/;
+    if(!re.test(form.email.value)) {  
+      alert("Error: Email is invalid.");
+      form.email.focus();
+      return false;
+    }
     if(form.login.value == "") {
       alert("Error: Username cannot be blank!");
       form.login.focus();
@@ -84,14 +90,14 @@ function passvis() {
 <center id="login">
 <form action="verify.php" id="form" method="POST" onsubmit="return checkForm(this);" >
 <br>
-<input style="width: 160px;" type="text" name="login" placeholder="Enter login" required><br><br><br>
+<input id="login" style="width: 160px;" type="text" name="login" placeholder="Enter login" required><br><br><br>
 <br><br>
 <div class="center">
 <input id="pw" style="width: 160px;" type="password" name="password" placeholder="Enter password" required><font color="white" face="verdana" size="1">
 Show password</font><input style="color: white" type="checkbox" onclick="passvis()"><br><br><br>
 </div>
 <br><br>
-<input style="width: 160px;" type="text" name="email" placeholder="Enter email" required><br><br>
+<input id="email" style="width: 160px;" type="text" name="email" placeholder="Enter email" required><br><br>
 <input class="button" type="submit" value="Submit">
 </form>
 </center>
