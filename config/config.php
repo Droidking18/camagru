@@ -40,12 +40,11 @@ function getDB() {
 
 function createTableDatabase($conn) {
 	$sql="CREATE TABLE IF NOT EXISTS `Users` (
-		`id` INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+		`id` VARCHAR(100) PRIMARY KEY UNIQUE,
 		`login` VARCHAR(50) NOT NULL UNIQUE,
 		`password` VARCHAR(255) NOT NULL,
-		`email` VARCHAR(50) NOT NULL UNIQUE);";
-	$conn->exec($sql);
-	$sql="INSERT INTO `Users` VALUES (0, 'dkaplan', 'killme', 'h@h.h');";
+        `email` VARCHAR(50) NOT NULL UNIQUE,
+        `emailverify` ENUM('N', 'Y') NOT NULL);";
 	$conn->exec($sql);
 	echo "Table created";
 }

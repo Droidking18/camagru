@@ -7,7 +7,7 @@ include ("header.php");
 if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['email'])) {
 	$conn = getDB();
 	$hash = password_hash($password, PASSWORD_BCRYPT, ["cost" => 10]); 
-	$sql = 'INSERT INTO users VALUES ('.$_POST["login"].' , '.$hash.', '.$_POST["email"].');';
+	$sql = 'INSERT INTO users VALUES (' . uniqid('', TRUE) . uniqid('', TRUE) . ', '.$_POST["login"].' , '.$hash.', '.$_POST["email"].');';
 	//exit($sql);
 	$conn->exec($sql);
 	exit();

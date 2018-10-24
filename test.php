@@ -1,5 +1,12 @@
 <?php
+ // the message
+$msg = "First line of text\nSecond line of text";
 
- 	$hash = '$2y$10$DXtioAyDPB78EBjhivOg7uYvoHA.B.GDXycDiqMikRUcBp/WrEsSa';
-	var_dump (password_verify('bob', $hash));
+// use wordwrap() if lines are longer than 70 characters
+$msg = wordwrap($msg,70);
+
+// send email
+var_dump (mail($_GET['email'],"My subject",$msg));
+
+?>
 

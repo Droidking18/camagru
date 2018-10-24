@@ -138,7 +138,7 @@ body {
 <div class='header'>
   <a href='https://www.reddit.com/r/PHP/comments/1fy71s/why_do_so_many_developers_hate_php/' class='logo'>
   <img src='https://cdn.boldomatic.com/content/post/C7fpXQ/Instaspam?size=800' height='50' width='50'></a>
-  <font size='5' style='color: gray;'>" . "<pre>           Welcome, " . $_SESSION['login'] . "! </pre></font>" .
+  <font size='5' style='color: gray;'>" . "<pre>           Welcome, " . htmlspecialchars($_SESSION['login']) . "! </pre></font>" .
   "<div class='header-right'>
 	<a class='active' href='index.php'>Home</a>
     <a href='post.php'>Upload</a>

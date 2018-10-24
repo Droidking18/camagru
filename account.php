@@ -85,10 +85,10 @@ function passvis() {
 <body background = "https://wallpapertag.com/wallpaper/full/a/d/8/8613-amazing-dark-background-2560x1600-download-free.jpg" style="background-size: cover;">
 <font color="white" style="text-align: center;">
 <center>
-Your email address is: "<?php echo $_SESSION['email']; ?>". <br>
-Your login is: "<?php echo $_SESSION['login']; ?>". <br><br>
+Your email address is: "<?php echo htmlspecialchars($_SESSION['email']); ?>". <br>
+Your login is: "<?php echo htmlspecialchars($_SESSION['login']); ?>". <br><br>
 To change email address, login or password, enter your current password<br>followed by your new detail, and the appropriate box ticked:<br><br>
-<form id="form" action="change.php" method="POST" onsubmit="return checkForm(this, '<?php echo $_SESSION['login']; ?>');">
+<form id="form" action="change.php" method="POST" onsubmit="return checkForm(this, '<?php echo htmlspecialchars($_SESSION['login']); ?>');">
     Enter your password:<br>
     <input type="password" name="password" id="password" required><br>
     Enter your new detail and specify the type:<br>
