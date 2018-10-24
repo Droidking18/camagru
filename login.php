@@ -12,11 +12,15 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
 	foreach ($conn->query($sql) as $user)
 	{
 		if ($user["login"] == $_POST['login'])
-			if (password_verify($_POST['password'], $user['password'])) {
-				$_SESSION['login'] = $_POST['login'];	
-				$_SESSION['email'] = $user['email'];	
-				$_SESSION['passhash'] = $user['password'];
-				exit();	
+            if (password_verify($_POST['password'], $user['password'])) {
+                if ($_user['emailverify'] == 'Y') {
+				    $_SESSION['login'] = $_POST['login'];	
+		    		$_SESSION['email'] = $user['email'];	
+			    	$_SESSION['passhash'] = $user['password'];
+                    exit();
+                }    
+                else
+                    echo "Please verify your account. <a href='emailagain.php?user=" . $user['login'] . "'> Click here to send link again</a>";
 			}
 			else
 				echo "Password Incorrect. <meta http-equiv='refresh' content='3;url=login.php' />";
