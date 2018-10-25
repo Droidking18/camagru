@@ -17,7 +17,7 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
 				    $_SESSION['login'] = $_POST['login'];	
 		    		$_SESSION['email'] = $user['email'];	
 			    	$_SESSION['passhash'] = $user['password'];
-                    exit();
+                    exit("Congratulations, you're now logged in. <meta http-equiv='refresh' content='3;url=index.php' />");
                 }    
                 else
                     echo "Please verify your account. <a href='emailagain.php?user=" . $user['login'] . "'> Click here to send link again</a>";
