@@ -87,7 +87,7 @@ function passvis() {
 <center>
 Your email address is: "<?php echo htmlspecialchars($_SESSION['email']); ?>". <br>
 Your login is: "<?php echo htmlspecialchars($_SESSION['login']); ?>". <br><br>
-To change email address, login or password, enter your current password<br>followed by your new detail, and the appropriate box ticked:<br><br>
+To change email address, login or password, enter your current password<br>followed by your new detail, and the appropriate box ticked.<br>Email notification are:<br><br>
 <form id="form" action="change.php" method="POST" onsubmit="return checkForm(this, '<?php echo htmlspecialchars($_SESSION['login']); ?>');">
     Enter your password:<br>
     <input type="password" name="password" id="password" required><br>
@@ -95,7 +95,8 @@ To change email address, login or password, enter your current password<br>follo
     <input type="password" name="detail" id="password2" required><br>
     <input type="radio" name="type" value="password" required onclick="passvis('1')"> Password
     <input type="radio" name="type" value="email" required onclick="passvis('0')"> Email
-    <input type="radio" name="type" value="login" required onclick="passvis('0')"> Username<br>
+    <input type="radio" name="type" value="login" required onclick="passvis('0')"> Username
+    <input type="radio" name="type" value="notify" required onclick="passvis('0')"> Email Notifications<br>
     <input type="submit" value="Submit"> 
 </center>
 </form>

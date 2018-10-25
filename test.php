@@ -7,6 +7,8 @@ $msg = wordwrap($msg,70);
 
 // send email
 var_dump (mail($_GET['email'],"My subject",$msg));
+echo "<script>alert('pld'); </script>"
+
 
 ?>
 

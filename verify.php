@@ -5,14 +5,18 @@ include ("config/config.php");
 include ("header.php");
 include ("mail.php");
 
-if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['email'])) {
-	try {
+if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['email'] && $_POST['notify'])) {
+    try {
+        if ($_POST['notify'] == "on")
+            $notify = "Y";
+        else
+            $notify = "N";
 		$conn = getDB();
         $hash = password_hash($_POST['password'], PASSWORD_BCRYPT);
         $id = uniqid('', TRUE) . uniqid('', TRUE);
         $login = htmlspecialchars($_POST["login"]);
         $email = htmlspecialchars($_POST["email"]);
-	    $sql = "INSERT INTO users (id, login, password, email) VALUES ('". htmlspecialchars($id) ."', '" . htmlspecialchars($login) . "', '" . htmlspecialchars($hash) . "', '". htmlspecialchars($email) ."');";
+	    $sql = "INSERT INTO users (id, login, password, email, notify) VALUES ('". htmlspecialchars($id) ."', '" . htmlspecialchars($login) . "', '" . htmlspecialchars($hash) . "', '". htmlspecialchars($email) ."', '" . $notify . "');";
 	    $conn->exec($sql);
         }
 	catch (PDOexception $e) { 

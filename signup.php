@@ -90,15 +90,16 @@ function passvis() {
 <center id="login">
 <form action="verify.php" id="form" method="POST" onsubmit="return checkForm(this);" >
 <br>
-<input id="login" style="width: 160px;" type="text" name="login" placeholder="Enter login" required><br><br><br>
-<br><br>
 <div class="center">
+<input id="login" style="width: 160px;" type="text" name="login" placeholder="Enter login" required><br><br><br>
+<br>
 <input id="pw" style="width: 160px;" type="password" name="password" placeholder="Enter password" required><font color="white" face="verdana" size="1">
-Show password</font><input style="color: white" type="checkbox" onclick="passvis()"><br><br><br>
-</div>
-<br><br>
-<input id="email" style="width: 160px;" type="text" name="email" placeholder="Enter email" required><br><br>
+Show password</font><input style="color: white" type="checkbox" onclick="passvis()"><br><br>
+<br>
+<input id="email" style="width: 160px;" type="text" name="email" placeholder="Enter email" required>
+<input id="notify" style="width: 160px; center" value="notify" type="checkbox" name="notify"><font size=1 style="color: white;">Tick for email notifications.</font><br><br>
 <input class="button" type="submit" value="Submit">
+</div>
 </form>
 </center>
 <div>

@@ -44,7 +44,8 @@ function createTableDatabase($conn) {
 		`login` VARCHAR(50) NOT NULL UNIQUE,
 		`password` VARCHAR(255) NOT NULL,
         `email` VARCHAR(50) NOT NULL UNIQUE,
-        `emailverify` ENUM('N', 'Y') NOT NULL);";
+        `emailverify` ENUM('N', 'Y') NOT NULL,
+        `notify` ENUM('N', 'Y') NOT NULL);";
 	$conn->exec($sql);
 	echo "Table created";
 }
