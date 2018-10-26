@@ -5,7 +5,7 @@ include ("config/config.php");
 
     if (!$_GET['id'] && !$_POST['id'])
         exit("Bad link.");
-    if (!$_GET['action'] && !$_POST['id']) {
+    if (!$_GET['action'] && !$_POST['id'] && $_GET['id']) {
         $conn = getDB();
         $sql = "SELECT * FROM Users";
         foreach ($conn->query($sql) as $user) {

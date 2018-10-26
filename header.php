@@ -141,7 +141,7 @@ body {
   <font size='5' style='color: gray;'>" . "<pre>           Welcome, " . htmlspecialchars($_SESSION['login']) . "! </pre></font>" .
   "<div class='header-right'>
 	<a class='active' href='index.php'>Home</a>
-    <a href='post.php'>Upload</a>
+    <a href='upload.php'>Upload</a>
     <a href='account.php'>Account</a>
     <a href='logout.php'>Logout</a>
   </div>

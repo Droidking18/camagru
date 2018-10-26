@@ -13,7 +13,7 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
 	{
 		if ($user["login"] == $_POST['login'])
             if (password_verify($_POST['password'], $user['password'])) {
-                if ($_user['emailverify'] == 'Y') {
+                if ($user['emailverify'] == 'Y') {
 				    $_SESSION['login'] = $_POST['login'];	
 		    		$_SESSION['email'] = $user['email'];	
 			    	$_SESSION['passhash'] = $user['password'];
