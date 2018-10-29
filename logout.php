@@ -2,7 +2,7 @@
 
 session_start();
 session_destroy();
-echo "<meta http-equiv='refresh' content='3;url=index.php' />";
+echo "<meta http-equiv='refresh' content='1;url=index.php' />";
 ?>
  
 <body background = "https://wallpapertag.com/wallpaper/full/a/d/8/8613-amazing-dark-background-2560x1600-download-free.jpg" style="background-size: cover;">
