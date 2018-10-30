@@ -4,6 +4,8 @@ session_start();
 include ("config/config.php");
 include ("header.php");
 
+if (isset($_SESSION['login']))
+    exit ("Youre already logged in. <meta http-equiv='refresh' content='0;url=index.php' />");
 
 getHead();
 if (isset($_POST['login']) && isset($_POST['password'])) {

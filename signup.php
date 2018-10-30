@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+if (isset($_SESSION['login']))
+    exit ("Youre already logged in. <meta http-equiv='refresh' content='0;url=index.php' />");
+
 include ("config/config.php");
 include ("header.php");
 
@@ -8,7 +11,6 @@ if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['email']
 	$conn = getDB();
 	$hash = password_hash($password, PASSWORD_BCRYPT, ["cost" => 10]); 
 	$sql = 'INSERT INTO users VALUES (' . uniqid('', TRUE) . uniqid('', TRUE) . ', '.$_POST["login"].' , '.$hash.', '.$_POST["email"].');';
-	//exit($sql);
 	$conn->exec($sql);
 	exit();
 }
