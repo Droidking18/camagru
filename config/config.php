@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', 'bigsucc');
@@ -39,7 +39,7 @@ function getDB() {
 	}
 
 function createTableDatabase($conn) {
-	$sql="CREATE TABLE IF NOT EXISTS `Users` (
+	$sql="CREATE TABLE IF NOT EXISTS `users` (
 		`id` VARCHAR(100) PRIMARY KEY UNIQUE,
 		`login` VARCHAR(50) NOT NULL UNIQUE,
 		`password` VARCHAR(255) NOT NULL,
@@ -47,6 +47,14 @@ function createTableDatabase($conn) {
         `emailverify` ENUM('N', 'Y') NOT NULL,
         `notify` ENUM('N', 'Y') NOT NULL);";
 	$conn->exec($sql);
-	echo "Table created";
+    echo "Table users created";
+    $sql="CREATE TABLE IF NOT EXISTS `images` (
+        `id` INT AUTO_INCREMENT PRIMARY KEY,
+        `login` VARCHAR(50) NOT NULL,
+        `comments` LONGTEXT,
+        `likes` LONGTEXT,
+        `image` LONGTEXT NOT NULL);";
+    $conn->exec($sql);
+    echo " and image table created";
 }
 ?>
