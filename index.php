@@ -1,12 +1,26 @@
 <?php
 
 include ("header.php");
+include ("config/config.php");
 session_start();
 
 if ($_SESSION['login'])
-	getLoggedHead();
+ getLoggedHead();
 else
-	getHead();
+ getHead();
+
+
+$conn = getDB();
+$sql = "SELECT * FROM images";
+foreach ($conn->query($sql) as $key=>$image)
+{
+    if ($key < $_GET['page'] * 5 && $key >= $_GET['page'] * 5 - 5)
+    {
+        echo "<img style='display:block; width:100px;' id='base64image'                 
+          src='" .  $image['image'] . "' /> <br>";
+    }
+}
+
 ?>
 
 <html>
