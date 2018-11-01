@@ -23,7 +23,7 @@ getHead();
 <script>
 function checkForm(form)
 {
-    re = /^[a-zA-Z0-9_\-\.]+@[a-zA-Z0-9_\-\.]+\.[a-zA-Z]{2,5}$/;
+    re = /^[a-zA-Z0-9_\-\.]+@[a-zA-Z0-9_\-\.]+\.[a-zA-Z]{2,15}$/;
     if(!re.test(form.email.value)) {  
       alert("Error: Email is invalid.");
       form.email.focus();

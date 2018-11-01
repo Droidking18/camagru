@@ -81,6 +81,11 @@ echo
 <style>
 * {box-sizing: border-box;}
 
+body, html {
+  height: 100%;
+  width: 100%;
+}
+
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -89,6 +94,7 @@ body {
 .header {
   overflow: hidden;
   padding: 20px 10px;
+  /*position: relative;*/
 }
 
 .header a {
@@ -121,6 +127,12 @@ body {
   float: right;
 }
 
+.welcome {
+    /*position: absolute;*/
+    height: 100%;
+    width: 100%;
+}
+
 @media screen and (max-width: 500px) {
   .header a {
     float: none;
@@ -134,11 +146,11 @@ body {
 </style>
 </head>
 <body>
-
+<title> CAMAGRU </title> 
 <div class='header'>
   <a href='https://www.reddit.com/r/PHP/comments/1fy71s/why_do_so_many_developers_hate_php/' class='logo'>
-  <img src='https://cdn.boldomatic.com/content/post/C7fpXQ/Instaspam?size=800' height='50' width='50'></a>
-  <font size='5' style='color: gray;'>" . "<pre>           Welcome, " . htmlspecialchars($_SESSION['login']) . "! </pre></font>" .
+  <img src='https://cdn.boldomatic.com/content/post/C7fpXQ/Instaspam?size=800' height='50' width='50'></a>"
+  . "<center class='welcome' style='display: inline; font-size: 20px; color: gray;'>           Welcome, " . htmlspecialchars($_SESSION['login']) . "! </center>" .
   "<div class='header-right'>
 	<a class='active' href='index.php'>Home</a>
     <a href='upload.php'>Upload</a>

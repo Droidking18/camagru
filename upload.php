@@ -4,7 +4,7 @@ session_start();
 
 include ("header.php");
 
-if (!$_SESSION['login']){
+if (!isset($_SESSION['login'])){
     echo "<meta http-equiv='refresh' content='0;url=login.php' />";
 }
 else
@@ -17,18 +17,20 @@ else
 <head>
 <meta charset="UTF-8">
 </head>
-<body>
+<body background = "https://wallpapertag.com/wallpaper/full/a/d/8/8613-amazing-dark-background-2560x1600-download-free.jpg" style="background-size: cover;">
+<center>
+<video autoplay="true" id="video">Failure</video>
+<canvas id="canvas" style="display: block;"></canvas>
+<div>
+    <div id="photos"> </div>
+</div>
+</center>
+<center>
+<button id="capture"> capture </button>
 <form action="photo.php" method="POST">
 <input type="hidden" id="upload" name="photo" value="photo">
 <input type="submit">
 </form>
-<center>
-<video autoplay="true" id="video">Failure</video>
-<button id="capture"> capture </button>
-<canvas id="canvas" style="display: none;"></canvas>
-<div>
-    <div id="photos"> </div>
-</div>
 </center>
 <script type="text/javascript">
  let width = 500,

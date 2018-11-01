@@ -3,8 +3,9 @@
 session_start();
 include("config/config.php");
 
-if (!isset($_SESSION['login']) || !isset($_POST['photo']))
+if (!isset($_SESSION['login']) || !isset($_POST['photo']) || $_POST['photo'] == '')
     exit ("Bad link. <meta http-equiv='refresh' content='0;url=index.php' />");
+exit ($_POST['photo']);
 try {
     $conn = getDB();
     $sql = "INSERT INTO images (login, image) VALUES (?, ?)";
