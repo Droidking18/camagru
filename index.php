@@ -21,7 +21,7 @@ foreach ($conn->query($sql) as $key=>$image)
 {
     if ($key < $_GET['page'] * 5 && $key >= $_GET['page'] * 5 - 5)
     {
-        echo "<div class='grid-item'> <a href='test.php'><img class='photo' id='base64image'                 
+        echo "<div class='grid-item'> <a href='action.php?id=" . $image['id'] . "'><img class='photo' id='base64image'                 
           src='" .  $image['image'] . "' /></a></div>";
     }
 }
