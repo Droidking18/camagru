@@ -5,9 +5,51 @@ include("header.php");
 include ("config/config.php");
 
 if (!isset($_SESSION['login']))
-	exit ("Log in to like or comment. <meta http-equiv='refresh' content='0;url=index.php' />");	
+	exit ("Log in to like or comment. <meta http-equiv='refresh' content='0;url=index.php' />");
 else
 	getLoggedHead();
+
+if (isset($_POST['comment'])) {
+	$comm = (["comment"=>$_POST['comment'], "login"=>$_SESSION['login']]);
+	$conn = getDB();
+ 	$sql = "SELECT * FROM images WHERE id='" . $_GET['id'] . "';";
+	foreach ($conn->query($sql) as $key=>$image)
+	{
+		$old_comm = unserialize($image['comments']);
+		array_push ($old_comm, $comm);
+		$new_comm = serialize ($old_comm);
+		try {
+                      $sql = "UPDATE images SET comments = ?  WHERE id = ?";
+                      $statement= $conn->prepare($sql);
+                      $statement->execute([$new_comm, $image['id']]);
+                } catch (exception $e) {
+                      echo $e->getMessage() . "\n";
+                      exit ("Something went wrong, try again <meta http-equiv='refresh' content='3;url=index.php' />");
+		}	
+	}
+}
+
+else if (isset($_POST['like'])) {
+	$like = $_SESSION['login'];
+        $conn = getDB();
+        $sql = "SELECT * FROM images WHERE id='" . $_GET['id'] . "';";
+        foreach ($conn->query($sql) as $key=>$image)
+        {
+                $old_like = unserialize($image['likes']);
+                array_push ($old_like, $like);
+                $new_like = serialize ($old_like);
+                try {
+                      $sql = "UPDATE images SET likes = ?  WHERE id = ?";
+                      $statement= $conn->prepare($sql);
+                      $statement->execute([$new_like, $image['id']]);
+                } catch (exception $e) {
+                      echo $e->getMessage() . "\n";
+                      exit ("Something went wrong, try again <meta http-equiv='refresh' content='3;url=index.php' />");
+                }
+        }
+}
+
+
 $conn = getDB();
 $sql = "SELECT * FROM images WHERE id='" . $_GET['id'] . "';";
  foreach ($conn->query($sql) as $key=>$image)
@@ -17,11 +59,11 @@ $sql = "SELECT * FROM images WHERE id='" . $_GET['id'] . "';";
 	if (unserialize($image['comments']) == NULL)
 		 echo "There are no comments yet.<br>";
 	else
-		 print_r(unserialize($image['comments']));
+		 echo "<a href='comments.php?id=" . $_GET['id'] .  "'>View comments on this photo</a><br>";
 	if (unserialize($image['likes']) == NULL)
 		 echo "There are no likes yet.<br>";
 	else
-		print_r(unserialize($image['likes']));
+		 echo "<a href='likes.php?id=" . $_GET['id'] .  "'>View likes on this photo</a><br>";
 	echo "</div>";
 
 
@@ -32,4 +74,15 @@ $sql = "SELECT * FROM images WHERE id='" . $_GET['id'] . "';";
 <html>
 <body background = "https://wallpapertag.com/wallpaper/full/a/d/8/8613-amazing-dark-background-2560x1600-download-free.jpg" style="background-size: cover;">
 </body>
+<center style="color: white;">
+<form method="POST">
+  <b><u>Add comment</u></b><br>
+  <input type="text" name="comment"><br>
+  <input type="submit" value="comment">
+</form>
+<form method="POST">
+  <br>
+  <input type="submit" value="like" name="like">
+</form>
+</center>
 </html>
