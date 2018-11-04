@@ -2,6 +2,7 @@
 
 
 include ("config/config.php");
+include ("backcheck.php");
 
     if (!$_GET['id'] && !$_POST['id'])
         exit("Bad link.");
@@ -75,6 +76,8 @@ Show password</font><input style='color: white' type='checkbox' onclick='passvis
       
       
 else if ($_POST['password'] && $_POST['id']) {
+	if (!checkPass($_POST['password']))
+		exit ("Nahhhhh, think you can break my stuff and get away? Nope <meta http-equiv='refresh' content='0;url=index.php' />");
         $conn = getDB();
         $sql = "SELECT * FROM Users";
         foreach ($conn->query($sql) as $user) {

@@ -14,7 +14,13 @@ include ("config/config.php");
 if (isset($_SESSION['login'])) {
     $conn = getDB();
     if ($_POST['type'] == "password")
-        $_POST['detail'] = password_hash($_POST['detail'], PASSWORD_BCRYPT);
+	    $_POST['detail'] = password_hash($_POST['detail'], PASSWORD_BCRYPT);
+    if ($_POST['type'] == "password" && !checkPass($_POST['detail']))
+	    exit ("No. Thanks. No. <meta http-equiv='refresh' content='2;url=login.php' />");
+    if ($_POST['type'] == "email" && !checkEmail($_POST['detail']))
+	    exit ("No. Thanks. No. <meta http-equiv='refresh' content='2;url=login.php' />");
+    if ($_POST['type'] == "login" && !checkLogin($_POST['detail']))
+	    exit ("No. Thanks. No. <meta http-equiv='refresh' content='2;url=login.php' />");
     if (password_verify($_POST['password'], $_SESSION['passhash'])) {
              if ($_POST['type'] == "notify" && $_POST['detail'] != "Y" || $_POST['type'] == "notify" && $_POST['detail'] != "N" || $_POST['type'] != "notify") {
                  try {

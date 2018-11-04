@@ -4,8 +4,12 @@ session_start();
 include ("config/config.php");
 include ("header.php");
 include ("mail.php");
+include ("backcheck.php");
 
 if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['email'])) {
+	if (!checkLogin($_POST['login']) || !checkpass($_POST['password'])
+		|| !checkEmail($_POST['email']))
+		exit ("You got something wrong, and that only happened becuase you played with my JS. Not cool man, not cool. <meta http-equiv='refresh' content='2;url=login.php' />");
     try {
         if ($_POST['notify'] == "on")
             $notify = "Y";

@@ -12,6 +12,13 @@ getLoggedHead();
 <script>
 function checkForm(form, login)
 {
+    if (form.type.value == "notify"){
+	if (!(form.password2.value == "Y" && !(form.password2.value == "N"))) {
+		alert("Error: email notification must be set as 'Y' or 'N'.");
+		form.password2.focus();
+		return false;
+	}
+    }
     if (form.type.value == "email"){
     re = /^[a-zA-Z0-9_\-\.]+@[a-zA-Z0-9_\-\.]+\.[a-zA-Z]{2,5}$/;
     if(!re.test(form.password2.value)) {
@@ -87,7 +94,7 @@ function passvis() {
 <center>
 Your email address is: "<?php echo htmlspecialchars($_SESSION['email']); ?>". <br>
 Your login is: "<?php echo htmlspecialchars($_SESSION['login']); ?>". <br><br>
-To change email address, login or password, enter your current password<br>followed by your new detail, and the appropriate box ticked.<br>Email notification are:<br><br>
+To change email address, login or password, enter your current password<br>followed by your new detail, and the appropriate box ticked. If you want to change email notification, only Y or N is accepted<br><br>
 <form id="form" action="change.php" method="POST" onsubmit="return checkForm(this, '<?php echo htmlspecialchars($_SESSION['login']); ?>');">
     Enter your password:<br>
     <input type="password" name="password" id="password" required><br>
