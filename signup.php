@@ -99,7 +99,7 @@ function passvis() {
 Show password</font><input style="color: white" type="checkbox" onclick="passvis()"><br><br>
 <br>
 <input id="email" style="width: 160px;" type="text" name="email" placeholder="Enter email" required>
-<input id="notify" style="width: 160px; center" value="notify" type="checkbox" name="notify"><font size=1 style="color: white;">Tick for email notifications.</font><br><br>
+<input id="notify" style="width: 160px; center" value="Y" type="checkbox" name="notify" checked><font size=1 style="color: white;">Tick for email notifications.</font><br><br>
 <input class="button" type="submit" value="Submit">
 </div>
 </form>

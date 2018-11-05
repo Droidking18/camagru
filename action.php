@@ -3,6 +3,7 @@
 session_start();
 include("header.php");
 include ("config/config.php");
+include ("mail.php");
 
 if (!isset($_SESSION['login']))
 	exit ("Log in to like or comment. <meta http-equiv='refresh' content='0;url=index.php' />");
@@ -26,7 +27,13 @@ if (isset($_POST['comment'])) {
                       echo $e->getMessage() . "\n";
                       exit ("Something went wrong, try again <meta http-equiv='refresh' content='3;url=index.php' />");
 		}	
-	}
+    }
+    $sql = "select images.id, images.login, users.email, users.notify from images inner join users on users.login=images.login where images.id=" . $image['id'] . ";";
+    foreach ($conn->query($sql) as $key=>$image)
+    {
+        if ($image['notify'] == "Y")
+            mail_comm($image['login'], $_POST['comment'] ,$_SESSION['login'], $image['email'], $image['id']);
+    }
 }
 
 else if (isset($_POST['like'])) {
@@ -46,6 +53,12 @@ else if (isset($_POST['like'])) {
                       echo $e->getMessage() . "\n";
                       exit ("Something went wrong, try again <meta http-equiv='refresh' content='3;url=index.php' />");
                 }
+        }
+        $sql = "select images.id, images.login, users.email, users.notify from images inner join users on users.login=images.login where images.id=" . $image['id'] . ";";
+        foreach ($conn->query($sql) as $key=>$image)
+        {
+            if ($image['notify'] == "Y")
+                mail_like($image['login'], $_SESSION['login'], $image['email'], $image['id']);
         }
 }
 
