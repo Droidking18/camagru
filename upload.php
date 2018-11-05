@@ -28,9 +28,17 @@ else
 <center>
 <button id="capture"> capture </button>
 <form action="photo.php" method="POST">
-<input type="hidden" id="upload" name="photo" value="photo">
+<input type="hidden" id="upload" name="photo" value=""required>
 <input type="submit">
 </form>
+
+
+
+<div id="buttonsDiv" >
+<input type="file" multiple="false" accept="image/*"  id="files"/>
+</div>
+
+
 </center>
 <script type="text/javascript">
  let width = 500,
@@ -42,12 +50,35 @@ const canvas = document.getElementById('canvas');
 const photos = document.getElementById('photos');
 const photoButton = document.getElementById('capture');
 
+
+if (window.File && window.FileReader && window.FileList && window.Blob) {
+  document.getElementById('files').addEventListener('change', handleFileSelect, false);
+} else {
+  alert('The File APIs are not fully supported in this browser.');
+}
+
+function handleFileSelect(evt) {
+  var arr = (document.getElementById('files').value).split(".");
+  var ext = arr[arr.length - 1];
+  var f = evt.target.files[0];
+  var reader = new FileReader();
+  reader.onload = (function(theFile) {
+    return function(e) {
+      var binaryData = e.target.result;
+      var base64String = "data:image/" + ext + ";base64," + (window.btoa(binaryData));
+      document.getElementById('upload').value = base64String;
+    };
+  })(f);
+  reader.readAsBinaryString(f);
+}
+
 navigator.getUserMedia = navigator.getUserMedia ||navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUsermedia || navigator.oGetUserMedia;
 if(navigator.getUserMedia){
     navigator.mediaDevices.getUserMedia({video: true, audio: false})
         .then(function (stream) { video.srcObject = stream; video.play(); })
         .catch(function (err) { console.log(`error: ${$err} `); } )
 }
+
 
 video.addEventListener('canplay', function (e) { if(!streaming) { height = video.videoHeight / (video.videoWidth / width); video.setAttribute('width', width); video.setAttribute('height', height); canvas.setAttribute('width', width); canvas.setAttribute('height', height); streaming = true;}}, false);
 
@@ -62,6 +93,8 @@ console.log(imgURL);
 
 document.getElementById("upload").value = imgURL;
 }
+
+
 
 </script>
 </body>
