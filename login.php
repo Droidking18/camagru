@@ -59,6 +59,7 @@ function passvis() {
 <input class="button" type="submit" value="Submit" style="margin-top: 10px;">
 </form>
 </center>
-<div>
+</div>
 </body>
+<footer style ="position: fixed; bottom: 100; color: gray; text-align: center;"><hr style="border: 2px solid gray;" />dkaplanⓒ</footer>
 </html>

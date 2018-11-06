@@ -109,5 +109,6 @@ To change email address, login or password, enter your current password<br>follo
 </form>
 </font>
 </body>
+<footer style ="color: gray; text-align: center; margin-top: 10em;"><hr style="border: 2px solid gray;" />dkaplanⓒ</footer>
 </html>
 

@@ -98,4 +98,5 @@ $sql = "SELECT * FROM images WHERE id='" . $_GET['id'] . "';";
   <input type="submit" value="like" name="like">
 </form>
 </center>
+<footer style ="color: gray; text-align: center; margin-top: 10em;"><hr style="border: 2px solid gray;" />dkaplanⓒ</footer>
 </html>

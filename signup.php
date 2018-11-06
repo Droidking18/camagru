@@ -106,4 +106,5 @@ Show password</font><input style="color: white" type="checkbox" onclick="passvis
 </center>
 <div>
 </body>
+<footer style ="position: fixed; bottom: -400; color: gray; text-align: center;"><hr style="border: 2px solid gray;" />dkaplanⓒ</footer>
 </html>

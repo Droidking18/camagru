@@ -117,4 +117,5 @@ document.getElementById("upload").value = imgURL;
 
 </script>
 </body>
+<footer style ="color: gray; text-align: center; margin-top: 10em;"><hr style="border: 2px solid gray;" />dkaplanⓒ</footer>
 </html>
