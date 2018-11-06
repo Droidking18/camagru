@@ -4,8 +4,8 @@ include ("header.php");
 include ("config/config.php");
 session_start();
 
-if (!isset($_GET['page']) || $_GET['page'] == 0)
-    echo "<meta http-equiv='refresh' content='3;url=index.php?page=1' />";
+if (!isset($_GET['page']) || $_GET['page'] <= 0)
+    exit ("<meta http-equiv='refresh' content='0;url=index.php?page=1' />");
 if ($_SESSION['login'])
  getLoggedHead();
 else
@@ -25,7 +25,17 @@ foreach ($conn->query($sql) as $key=>$image)
           src='" .  $image['image'] . "' /></a></div>";
     }
 }
-echo "</div>";
+echo "</div><br><br>";
+echo "<center style='color: white;'> page <a href='index.php?page=1'> 1 </a>";
+if ($_GET['page'] != 1)
+    echo "<a href='index.php?page=" . ($_GET['page'] - 1) . "'> prev </a>";
+if (($_GET['page'] + 1) <= (int)($key / 5 + 1))
+    echo "<a href='index.php?page=" . ($_GET['page'] + 1) . "'> next </a>";
+if ($_GET['page'] != (int)($key / 5 + 1))
+    echo "<a href='index.php?page=" . (int)($key / 5 + 1) ."'> last </a></center>";
+if ($_GET['page'] > (int)($key / 5 + 1))
+    exit ("<meta http-equiv='refresh' content='0;url=index.php?page=" . (int)($key / 5 + 1) ."' />");
+
 
 ?>
 

@@ -9,7 +9,9 @@ include ("backcheck.php");
 if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['email'])) {
 	if (!checkLogin($_POST['login']) || !checkpass($_POST['password'])
 		|| !checkEmail($_POST['email']))
-		exit ("You got something wrong, and that only happened becuase you played with my JS. Not cool man, not cool. <meta http-equiv='refresh' content='2;url=login.php' />");
+        exit ("You got something wrong, and that only happened becuase you played with my JS. Not cool man, not cool. <meta http-equiv='refresh' content='2;url=login.php' />");
+    if (!isset($_POST['login']))
+        exit ("
     try {
         if (isset($_POST['notify']))
             $notify = "Y";
