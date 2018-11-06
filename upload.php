@@ -20,6 +20,15 @@ else
 <body background = "https://wallpapertag.com/wallpaper/full/a/d/8/8613-amazing-dark-background-2560x1600-download-free.jpg" style="background-size: cover;">
 <center>
 <video autoplay="true" id="video">Failure</video>
+<select id="filter">
+    <option value="invert(0%)">NONE</option>
+    <option value="sepia(100%)">Sepia</option>
+    <option value="grayscale(100%)">Greyscale</option>
+    <option value="blur(10px)">Blur</option>
+    <option value="invert(100%)">Invert</option>
+    <option value="hue-rotate(90deg)">Hue</option>
+    <option value="contrast(200%)">Contrast</option>
+</select>
 <canvas id="canvas" style="display: block;"></canvas>
 <div>
     <div id="photos"> </div>
@@ -49,6 +58,7 @@ const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
 const photos = document.getElementById('photos');
 const photoButton = document.getElementById('capture');
+const photoFilter = document.getElementById('filter');
 
 
 if (window.File && window.FileReader && window.FileList && window.Blob) {
@@ -83,6 +93,15 @@ if(navigator.getUserMedia){
 video.addEventListener('canplay', function (e) { if(!streaming) { height = video.videoHeight / (video.videoWidth / width); video.setAttribute('width', width); video.setAttribute('height', height); canvas.setAttribute('width', width); canvas.setAttribute('height', height); streaming = true;}}, false);
 
 photoButton.addEventListener('click', function(e) { takePicture(); e.preventDefault(); } , false);
+
+
+photoFilter.addEventListener('change', function(e) { 
+    filter =  e.target.value;
+    video.style.filter = filter;
+    //e.PreventDefault();
+}
+);
+
 
 function takePicture () { const context = canvas.getContext('2d');  if (width && height) { canvas.width = width; canvas.height = height; } context.drawImage(video, 0, 0, width, height); 
 
