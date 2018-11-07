@@ -3,6 +3,7 @@
 session_start();
 
 include ("header.php");
+include ("merge.php");
 
 if (!isset($_SESSION['login'])){
     echo "<meta http-equiv='refresh' content='0;url=login.php' />";
@@ -19,17 +20,21 @@ else
 </head>
 <body background = "https://wallpapertag.com/wallpaper/full/a/d/8/8613-amazing-dark-background-2560x1600-download-free.jpg" style="background-size: cover;">
 <center>
-<video autoplay="true" id="video">Failure</video>
+<div style="position: relative; text-align: center; color: white;">
+        <video poster="https://nestify.io/wp-content/uploads/2016/06/php-sucks.png" autoplay="true" style="width:70%;" id="video">Failure</video>
+</div>
 <select id="filter">
-    <option value="invert(0%)">NONE</option>
-    <option value="sepia(100%)">Sepia</option>
-    <option value="grayscale(100%)">Greyscale</option>
-    <option value="blur(10px)">Blur</option>
-    <option value="invert(100%)">Invert</option>
-    <option value="hue-rotate(90deg)">Hue</option>
-    <option value="contrast(200%)">Contrast</option>
+    <option value="none.png">NONE</option>
+    <option value="frame.png">Frame 1</option>
+    <option value="frame2.png">Frame 2</option>
+    <option value="frame3.png">Frame 3</option>
+    <option value="smiley.png">Smiley</option>
+    <option value="harryPotter.png">Harry Potter</option>
 </select>
-<canvas id="canvas" style="display: block;"></canvas>
+<div style="position: relative; text-align: center; color: white;">
+    <canvas id="canvas" style="width:70%;"></canvas>
+    <img id="overlay" src = "none.png" onerror="this.style.display='none'" style="width: 70%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+</div>
 <div>
     <div id="photos"> </div>
 </div>
@@ -37,7 +42,8 @@ else
 <center>
 <button id="capture"> capture </button>
 <form action="photo.php" method="POST">
-<input type="hidden" id="upload" name="photo" value=""required>
+<input type="hidden" name="photo" id="upload" value=""required>
+<input type="hidden" name="filter" id="overlaysend" value=""required>
 <input type="submit">
 </form>
 
@@ -97,8 +103,8 @@ photoButton.addEventListener('click', function(e) { takePicture(); e.preventDefa
 
 photoFilter.addEventListener('change', function(e) { 
     filter =  e.target.value;
-    video.style.filter = filter;
-    //e.PreventDefault();
+    document.getElementById("overlay").src = filter;
+    document.getElementById("overlaysend").value = document.getElementById("filter").value;
 }
 );
 
@@ -108,9 +114,9 @@ function takePicture () { const context = canvas.getContext('2d');  if (width &&
 const imgURL = canvas.toDataURL('image/png');
 
 toString(imgURL);
-console.log(imgURL);
 
-document.getElementById("upload").value = imgURL;
+img = imgURL.split(",")[1];
+document.getElementById("upload").value = img;
 }
 
 

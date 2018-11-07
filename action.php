@@ -10,6 +10,26 @@ if (!isset($_SESSION['login']))
 else
 	getLoggedHead();
 
+if (isset($_GET['action']))
+{
+    if ($_GET['action'] != "delete")
+        exit ("GET LOST. excuse the pun, also it was intended. <meta http-equiv='refresh' content='0;url=index.php' />");
+    $conn = getDB();
+    $sql = "SELECT * FROM images WHERE id='" . $_GET['id'] . "';";
+    foreach ($conn->query($sql) as $key=>$image)
+    {
+        if ($_SESSION['login'] != $image['login'])
+            exit ("YOU ARE NOT AUTHORIZED TO BE HERE. IF YOU DON'T LIKE THE IMAGE REPORT IT TO SOMEONE WHO CARES <meta http-equiv='refresh' content='0;url=index.php' />");
+        else
+        {
+            $sql = "DELETE FROM `images` WHERE `id` = ?";
+            $statement = $conn->prepare($sql);
+            $statement->execute([$_GET['id']]);
+            exit("Photo deleted <meta http-equiv='refresh' content='0;url=index.php' />");
+        }
+    }
+}
+
 if (isset($_POST['comment'])) {
 	$comm = (["comment"=>$_POST['comment'], "login"=>$_SESSION['login']]);
 	$conn = getDB();
@@ -77,9 +97,9 @@ $sql = "SELECT * FROM images WHERE id='" . $_GET['id'] . "';";
 		 echo "There are no likes yet.<br>";
 	else
 		 echo "<a href='likes.php?id=" . $_GET['id'] .  "'>View likes on this photo</a><br>";
-	echo "</div>";
-
-
+    if ($image['login'] == $_SESSION['login'])
+        echo "<a href='action.php?id=" . $_GET['id']  . "&action=delete'>Delete photo</a><br>";
+    echo "</div>";
 }
 
 ?>

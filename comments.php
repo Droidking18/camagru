@@ -19,7 +19,7 @@
   }
  echo "<table style='width:100%'>";
          foreach ($comments as $comment)
-                  echo "<tr> <th>" . $comment['login'] . "</th> <th> " . $comment['comment'] . " </tr>";
+                  echo "<tr> <th>" . $comment['login'] . "</th> <th> " . htmlspecialchars($comment['comment']) . " </tr>";
  echo "</table>";
  
  ?>
