@@ -14,6 +14,5 @@ function mail_comm ($login, $comment, $sender, $email, $phid) {
 function mail_like ($login, $sender, $email, $phid) { 
     $msg = "Hi, " . $login . "! " . ucfirst($sender) . " has liked your photo (127.0.0.1:8080/camagru/action.php?id=" . $phid . ").";
     mail($email, "You got comments", $msg);
-    exit ("sent");
 }
 ?>
