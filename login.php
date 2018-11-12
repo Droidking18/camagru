@@ -10,7 +10,7 @@ if (isset($_SESSION['login']))
 getHead();
 if (isset($_POST['login']) && isset($_POST['password'])) {
 	$conn = getDB();
-	$sql = "SELECT * FROM users";
+    $sql = "SELECT * FROM users";
 	foreach ($conn->query($sql) as $user)
 	{
 		if ($user["login"] == $_POST['login'])

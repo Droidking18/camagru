@@ -11,7 +11,7 @@ function makeImage($add, $src) {
     imagecopyresampled( $png, $png2, 0, 0, 0, 0, $sizex, $sizey, $sizex, $sizey);
     imagepng($png, "result.png");
     $data = file_get_contents("result.png");
-    $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+    $base64 = 'data:image/png;base64,' . base64_encode($data);
     unlink("result.png");
     unlink("user.png");
     return $base64;

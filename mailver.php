@@ -82,8 +82,9 @@ else if ($_POST['password'] && $_POST['id']) {
         $sql = "SELECT * FROM Users";
         foreach ($conn->query($sql) as $user) {
             if ($user['id'] == $_POST['id']) {
-                $sql = "UPDATE Users SET password = '" . password_hash($_POST['password'], PASSWORD_BCRYPT) . "' WHERE id = '" . $_POST['id'] ."';";
-                $conn->exec($sql);
+                $sql = "UPDATE Users SET password = ? WHERE id = ?";
+                $statement= $conn->prepare($sql);
+                $statement->execute([password_hash($_POST['password'], PASSWORD_BCRYPT), $_POST['id']]);
                 echo "<meta http-equiv='refresh' content='0;url=login.php' />";
             }
         }

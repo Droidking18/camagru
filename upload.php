@@ -50,7 +50,7 @@ else
 
 
 <div id="buttonsDiv" >
-<input type="file" multiple="false" accept="image/*"  id="files"/>
+<input type="file" multiple="false" accept="image/png"  id="files"/>
 </div>
 
 
@@ -81,7 +81,7 @@ function handleFileSelect(evt) {
   reader.onload = (function(theFile) {
     return function(e) {
       var binaryData = e.target.result;
-      var base64String = "data:image/" + ext + ";base64," + (window.btoa(binaryData));
+      var base64String = (window.btoa(binaryData));
       document.getElementById('upload').value = base64String;
     };
   })(f);

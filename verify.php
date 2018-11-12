@@ -7,11 +7,8 @@ include ("mail.php");
 include ("backcheck.php");
 
 if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['email'])) {
-	if (!checkLogin($_POST['login']) || !checkpass($_POST['password'])
-		|| !checkEmail($_POST['email']))
+	if (!checkLogin($_POST['login']) || !checkpass($_POST['password']) || !checkEmail($_POST['email']))
         exit ("You got something wrong, and that only happened becuase you played with my JS. Not cool man, not cool. <meta http-equiv='refresh' content='2;url=login.php' />");
-    if (!isset($_POST['login']))
-        exit ("
     try {
         if (isset($_POST['notify']))
             $notify = "Y";
@@ -22,9 +19,13 @@ if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['email']
         $id = uniqid('', TRUE) . uniqid('', TRUE);
         $login = htmlspecialchars($_POST["login"]);
         $email = htmlspecialchars($_POST["email"]);
-	    $sql = "INSERT INTO users (id, login, password, email, notify) VALUES ('". htmlspecialchars($id) ."', '" . htmlspecialchars($login) . "', '" . htmlspecialchars($hash) . "', '". htmlspecialchars($email) ."', '" . $notify . "');";
-	    $conn->exec($sql);
-        }
+        $sql = "INSERT INTO users (id, login, password, email, notify) VALUES (?, ?, ?, ?, ?)";               
+        $statement= $conn->prepare($sql);
+        $statement->execute([$id, $login, $hash, $email, $notify]);
+                 } catch (exception $e) {
+                       echo $e->getMessage() . "\n";
+                       exit ("Something went wrong, try again <meta http-equiv='refresh' content='3;url=index.php' />");
+         }
 	catch (PDOexception $e) { 
 		if (preg_match ("/Duplicate/", $e->getMessage()))
 			if (preg_match ("/login/", $e->getMessage())){
